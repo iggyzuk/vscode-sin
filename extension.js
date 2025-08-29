@@ -2,7 +2,7 @@ const vscode = require('vscode');
 
 function activate(context) {
     let disposable = vscode.commands.registerCommand(
-        'sin.find',
+        'sin.searchSymbol',
         () => {
             const editor = vscode.window.activeTextEditor;
             if (!editor) return;

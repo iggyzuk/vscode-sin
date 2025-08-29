@@ -12,10 +12,14 @@
   ],
   "activationEvents": [],
   "main": "./extension.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iggyzuk/vscode-sin.git"
+  },
   "contributes": {
     "commands": [{
       "command": "sin.searchSymbol",
-      "title": "Find Symbol (Sin)"
+      "title": "Search for Symbol"
     }]
   },
   "scripts": {
