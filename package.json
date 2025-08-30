@@ -3,7 +3,7 @@
   "publisher": "iggyzuk",
   "displayName": "sin",
   "description": "Search for symbol under cursor in workspace",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.103.0"
   },
@@ -17,9 +17,20 @@
     "url": "git@github.com:iggyzuk/vscode-sin.git"
   },
   "contributes": {
-    "commands": [{
+    "commands": [
+    {
       "command": "sin.searchSymbol",
       "title": "Search for Symbol"
+    },
+    {
+      "command": "sin.closeQuickOpenAndFocusEditor",
+      "title": "Close Quick Open and Focus Editor"
+    }],
+    "keybindings": [
+    {
+      "key": "escape",
+      "command": "sin.closeQuickOpenAndFocusEditor",
+      "when": "!inputFocus"
     }]
   },
   "scripts": {

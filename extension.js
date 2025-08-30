@@ -1,23 +1,28 @@
 const vscode = require('vscode');
 
 function activate(context) {
-    let disposable = vscode.commands.registerCommand(
-        'sin.searchSymbol',
-        () => {
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) return;
+    // Register your custom search command
+    let searchDisposable = vscode.commands.registerCommand('sin.searchSymbol', () => {
 
-            const wordRange = editor.document.getWordRangeAtPosition(editor.selection.start);
-            if (!wordRange) return;
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) return; // No open editor
 
-            const wordText = editor.document.getText(wordRange);
+        const wordRange = editor.document.getWordRangeAtPosition(editor.selection.active);
+        if (!wordRange) return; // No word under cursor
 
-            // Add "%" before the symbol name
-            vscode.commands.executeCommand('workbench.action.quickOpen', `%${wordText}`);
-        }
-    );
+        const wordText = editor.document.getText(wordRange);
 
-    context.subscriptions.push(disposable);
+        // Open Quick Open in "workspace symbol" mode by prefixing '%'
+        vscode.commands.executeCommand('workbench.action.quickOpen', `%${wordText}`);
+    });
+
+    // WIP
+    let escDisposable = vscode.commands.registerCommand('sin.closeQuickOpenAndFocusEditor', () => {
+        console.log('sin.closeQuickOpenAndFocusEditor'); // 👈 log for testing
+        vscode.commands.executeCommand('workbench.action.focusFirstEditorGroup');
+    });
+
+    context.subscriptions.push(searchDisposable, escDisposable);
 }
 
 function deactivate() {}
